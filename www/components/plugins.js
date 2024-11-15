@@ -3,13 +3,15 @@
 $(document).on("click", "#camera",function(){
 
 navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-    destinationType: Camera.DestinationType.FILE_URI });
+    destinationType: Camera.DestinationType.FILE_URI,
+    correctOrientation: true,
+    saveToPhotoAlbum: true
+
+});
 
 function onSuccess(imageURI) {
-    window.resolveLocalFileSystemURL(uri, (entry) => {
-        let img = document.getElementById('image');
-        img.src = entry.toURL();
-    }, onFail);
+    var image = document.getElementById('imagem');
+    image.src = imageURI;
 }
 
 function onFail(message) {
